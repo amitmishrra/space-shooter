@@ -342,6 +342,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 5056555256476617549, guid: 886a19db27493fa47ac98bb7d8ed691e, type: 3}
+  Dushman_BKL: {fileID: 8810419342449338594, guid: 885c326ccafc7614d8e83f478fcd6369, type: 3}
+  fireRate: 0.5
+  nextFire: 0
+  enemySpeed: 1
+  nextEnemy: 1
 --- !u!135 &1309548558
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -422,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 1309548556}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.99, z: -11.76}
+  m_LocalPosition: {x: 0, y: 0.99, z: -0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

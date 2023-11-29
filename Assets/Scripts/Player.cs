@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private bool flag 
-    { get; set; }
+    private System.Random random = new System.Random();
 
     [SerializeField] /*Used to make a private variable public in unity*/
     private GameObject laser;
 
+    [SerializeField] /*Used to make a private variable public in unity*/
+    private GameObject Dushman_BKL;
+
+    public float fireRate = 0.2f;
+    public float nextFire = 0.0f;
+
+    public float enemySpeed = 10.0f;
+    public float nextEnemy = 1.0f;
+
     void Start()
     {
-        transform.position = new Vector3(0, 0, -4);
+        transform.position = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -20,17 +28,19 @@ public class Player : MonoBehaviour
     {
         movement();
         fire();
-
+        handleEnemy();
     }
 
 
     void fire()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //Time.time --- for how long game has been running
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
             //Instantiate -- it is used to make a clone of the game objected which is attached with the variable 
             //transform.position -- it is used to give the initial position of the current object
-            Instantiate(laser, transform.position, Quaternion.identity);
+            Instantiate(laser, transform.position + new Vector3(0, 0.02f, 0), Quaternion.identity);
+            nextFire = Time.time + fireRate;
         }
     }
 
@@ -63,6 +73,16 @@ public class Player : MonoBehaviour
         else if (transform.position.x < -15)
         {
             transform.position = new Vector3(18, transform.position.y, 0);
+        }
+    }
+
+     void handleEnemy()
+    {
+        if(Time.time > nextEnemy)
+        {
+            float randomNumber = random.Next(-13, 16);
+            Instantiate(Dushman_BKL,  new Vector3(randomNumber, 10, 0), Quaternion.identity);
+            nextEnemy = Time.time + enemySpeed;
         }
     }
 }
