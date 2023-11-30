@@ -21,7 +21,9 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //Collider2D && OnTriggerEnter2D -- when hame is 2d 
+    //Collider && OnTriggerEnter -- when game is 3d
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.transform.name== "Laser(Clone)")
         {

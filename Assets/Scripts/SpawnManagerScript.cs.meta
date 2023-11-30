@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 34ffd957c6a2cd1488e6b701a4ff9ff8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Dushman_BKL: {fileID: 8810419342449338594, guid: 885c326ccafc7614d8e83f478fcd6369, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private System.Random random = new System.Random();
 
     [SerializeField] /*Used to make a private variable public in unity*/
     private GameObject laser;
 
-    [SerializeField] /*Used to make a private variable public in unity*/
-    private GameObject Dushman_BKL;
 
     public float fireRate = 0.2f;
     public float nextFire = 0.0f;
 
-    public float enemySpeed = 10.0f;
-    public float nextEnemy = 1.0f;
+    private SpawnManagerScript spawnManagerScript;
 
     [SerializeField]
     private int lives = 3;
 
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0, -7, 0);
+
+        //Getting object from other file
+
+        //SpawnManager -- name of the componenet in which script is attached 
+        //SpawnManagerScript-- name of th script 
+        spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManagerScript>();
+        if(spawnManagerScript == null )
+        {
+            Debug.Log("BUGG");
+        }
     }
 
     // Update is called once per frame
@@ -31,7 +37,6 @@ public class Player : MonoBehaviour
     {
         Movement();
         Fire();
-        HandleEnemy();
     }
 
 
@@ -79,23 +84,16 @@ public class Player : MonoBehaviour
         }
     }
 
-     void HandleEnemy()
-    {
-        if(Time.time > nextEnemy)
-        {
-            float randomNumber = random.Next(-13, 16);
-            Instantiate(Dushman_BKL,  new Vector3(randomNumber, 10, 0), Quaternion.identity);
-            nextEnemy = Time.time + enemySpeed;
-        }
-    }
+
 
     public void Damage()
     {
         lives = lives - 1;
 
         if(lives == 0)
-        {
+        {    
             Destroy(gameObject);
+            spawnManagerScript.onPlyaerDeath();
         }
     }
 }
