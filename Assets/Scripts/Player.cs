@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public float enemySpeed = 10.0f;
     public float nextEnemy = 1.0f;
 
+    [SerializeField]
+    private int lives = 3;
+
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -26,13 +29,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement();
-        fire();
-        handleEnemy();
+        Movement();
+        Fire();
+        HandleEnemy();
     }
 
 
-    void fire()
+    void Fire()
     {
         //Time.time --- for how long game has been running
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void movement()
+    void Movement()
     {
 
         //For taking inputs from keyboard
@@ -76,13 +79,23 @@ public class Player : MonoBehaviour
         }
     }
 
-     void handleEnemy()
+     void HandleEnemy()
     {
         if(Time.time > nextEnemy)
         {
             float randomNumber = random.Next(-13, 16);
             Instantiate(Dushman_BKL,  new Vector3(randomNumber, 10, 0), Quaternion.identity);
             nextEnemy = Time.time + enemySpeed;
+        }
+    }
+
+    public void Damage()
+    {
+        lives = lives - 1;
+
+        if(lives == 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
