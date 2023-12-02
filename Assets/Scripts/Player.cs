@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-    [SerializeField] /*Used to make a private variable public in unity*/
+    [SerializeField]
     private GameObject laser;
 
+    private bool isPowered;
+    private bool isPowerUpActive;
 
     public float fireRate = 0.2f;
     public float nextFire = 0.0f;
@@ -19,14 +20,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, -7, 0);
+        transform.position = new Vector3(0, -5.5f, 0);
 
-        //Getting object from other file
-
-        //SpawnManager -- name of the componenet in which script is attached 
-        //SpawnManagerScript-- name of th script 
+        // Getting object from another file
         spawnManagerScript = GameObject.Find("SpawnManager").GetComponent<SpawnManagerScript>();
-        if(spawnManagerScript == null )
+        if (spawnManagerScript == null)
         {
             Debug.Log("BUGG");
         }
@@ -39,32 +37,29 @@ public class Player : MonoBehaviour
         Fire();
     }
 
-
     void Fire()
     {
-        //Time.time --- for how long game has been running
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
-            //Instantiate -- it is used to make a clone of the game objected which is attached with the variable 
-            //transform.position -- it is used to give the initial position of the current object
             Instantiate(laser, transform.position + new Vector3(0, 0.02f, 0), Quaternion.identity);
+
+            if (isPowerUpActive)
+            {
+                Instantiate(laser, transform.position + new Vector3(-1.52f, -1.25f, 0), Quaternion.identity);
+                Instantiate(laser, transform.position + new Vector3(1.64f, -1.25f, 0), Quaternion.identity);
+            }
             nextFire = Time.time + fireRate;
         }
     }
 
     void Movement()
     {
-
-        //For taking inputs from keyboard
-        float horizantalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         int speed = 4;
-        Vector3 direction = new Vector3(horizantalInput, verticalInput, 0);
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
         transform.Translate(direction * speed * Time.deltaTime);
 
-
-
-        // This gives a limit to the player, so it doesnt cross the border
         if (transform.position.y > 9)
         {
             transform.position = new Vector3(transform.position.x, -9, 0);
@@ -84,16 +79,39 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
     public void Damage()
     {
-        lives = lives - 1;
+        lives--;
 
-        if(lives == 0)
-        {    
+        if (lives == 0)
+        {
             Destroy(gameObject);
-            spawnManagerScript.onPlyaerDeath();
+            spawnManagerScript.OnPlayerDeath();
+        }
+    }
+
+    public void PowerUp()
+    {
+        if (lives > 1 && !isPowerUpActive)
+        {
+            isPowerUpActive = true;
+            StartCoroutine(DeactivatePowerUp(5.0f));
+        }
+    }
+
+    private IEnumerator DeactivatePowerUp(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isPowerUpActive = false;
+        Debug.Log("Power-up deactivated");
+    }
+
+    public void RevokePower()
+    {
+        if (lives > 1 && isPowerUpActive)
+        {
+            Debug.Log("Power-up revoked");
+            isPowerUpActive = false;
         }
     }
 }

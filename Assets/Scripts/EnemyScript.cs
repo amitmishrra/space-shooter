@@ -36,6 +36,7 @@ public class EnemyScript : MonoBehaviour
         if(other.transform.name == "Player")
         {
             //Getting the other game object in other file....here getting the method of player in ememy method
+            Destroy(gameObject);
             other.transform.GetComponent<Player>().Damage();
         }
     }
