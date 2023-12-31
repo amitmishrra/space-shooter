@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -28,6 +27,8 @@ public class EnemyScript : MonoBehaviour
         if(other.transform.name== "Laser(Clone)")
         {
             Destroy(gameObject);
+            GameObject.Find("Player").GetComponent<Player>().UpdateScore();
+          /*  GameObject.Find("Player").GetComponent<Player>().SetLifeSprite();*/
             Destroy(other.gameObject);
         }
 
@@ -37,7 +38,14 @@ public class EnemyScript : MonoBehaviour
         {
             //Getting the other game object in other file....here getting the method of player in ememy method
             Destroy(gameObject);
-            other.transform.GetComponent<Player>().Damage();
+            if (other.transform.GetComponent<Player>().isShieldActive ==false)
+            {
+                other.transform.GetComponent<Player>().Damage();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1974009030649835044}
   - component: {fileID: 3602563383892390296}
   - component: {fileID: -5339377478939466033}
+  - component: {fileID: -6316744121543879862}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -157,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.0140643, y: 3.671514}
+  m_Size: {x: 2.586123, y: 3.671514}
   m_EdgeRadius: 0
 --- !u!114 &-5339377478939466033
 MonoBehaviour:
@@ -171,3 +172,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01d9e0e1a473b4488b7da0a688dee8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-6316744121543879862
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6688363968814654767}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80f1dd60ee75afe4ca4b871ab74b54e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -8,6 +8,10 @@ MonoImporter:
   - Dushman_BKL_Container: {instanceID: 0}
   - Power_Up: {fileID: 6688363968814654767, guid: 84f4f85a414d4314098341d35f4e7d34, type: 3}
   - Power_Up_Container: {instanceID: 0}
+  - Speed_Up: {fileID: 6677879608732916921, guid: d79719544827ef34aa814a2733c2f9d5, type: 3}
+  - Speed_Up_Container: {instanceID: 0}
+  - Shiled_Up: {fileID: 8322197002494776470, guid: 3433d8c72445bbc409122891e807af17, type: 3}
+  - Shiled_Up_Container: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
